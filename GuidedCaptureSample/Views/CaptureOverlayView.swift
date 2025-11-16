@@ -12,12 +12,10 @@ import os
 
 private let logger = Logger(subsystem: GuidedCaptureSampleApp.subsystem, category: "CaptureOverlayView")
 
-struct CaptureOverlayView: View {
+struct CaptureOverlayView: View, OverlayButtons {
     @Environment(AppDataModel.self) var appModel
     var session: ObjectCaptureSession
 
-    // Reads persistently from the System settings where users can toggle it on/off once they
-    // no longer feel they need it.
     @AppStorage("show_tutorials") var areTutorialsEnabledInUserSettings: Bool = true
     
     @State private var showCaptureModeGuidance: Bool = false
@@ -35,6 +33,11 @@ struct CaptureOverlayView: View {
                                       showCaptureModeGuidance: showCaptureModeGuidance)
 
                     Spacer()
+
+                    if appModel.captureMode == .rotation && isCapturingStarted(state: session.state) {
+                        RotationIndicatorView(session: session)
+                            .transition(.opacity)
+                    }
 
                     BoundingBoxGuidanceView(session: session, hasDetectionFailed: hasDetectionFailed)
 
@@ -258,6 +261,12 @@ private struct BoundingBoxGuidanceView: View {
                     value: "Move around to ensure that the whole object is inside the box. Drag handles to manually resize.",
                     comment: "Feedback message to resize the box to the object.")
             }
+        } else if isCapturingStarted(state: session.state) && appModel.captureMode == .rotation {
+            return NSLocalizedString(
+                "Rotate the object slowly and steadily. Keep device stationary. (Object Capture, Rotation, Capturing)",
+                bundle: Bundle.main,
+                value: "Rotate the object slowly and steadily. Keep device stationary.",
+                comment: "Guidance message during rotation capture.")
         } else {
             return nil
         }
@@ -276,5 +285,47 @@ extension OverlayButtons {
             default:
                 return true
         }
+    }
+}
+
+private struct RotationIndicatorView: View {
+    @Environment(AppDataModel.self) var appModel
+    var session: ObjectCaptureSession
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 8) {
+                Image(systemName: "arrow.triangle.2.circlepath")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                Text(LocalizedString.rotationModeActive)
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(.ultraThinMaterial)
+            .cornerRadius(12)
+            
+            Text(LocalizedString.rotationGuidance)
+                .font(.subheadline)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 20)
+        }
+    }
+    
+    private struct LocalizedString {
+        static let rotationModeActive = NSLocalizedString(
+            "Rotation Mode Active (Object Capture)",
+            bundle: Bundle.main,
+            value: "Rotation Mode Active",
+            comment: "Title showing rotation mode is active during capture.")
+        
+        static let rotationGuidance = NSLocalizedString(
+            "Keep your device stationary and rotate the object slowly 360 degrees. (Object Capture, Rotation)",
+            bundle: Bundle.main,
+            value: "Keep your device stationary and rotate the object slowly 360 degrees.",
+            comment: "Guidance text for rotation mode during capture.")
     }
 }

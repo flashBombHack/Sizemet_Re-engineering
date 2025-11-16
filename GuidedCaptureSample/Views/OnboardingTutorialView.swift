@@ -179,8 +179,23 @@ struct OnboardingTutorialView: View {
     ]
 
     private var title: String {
-        onboardingStateToTitleMap[onboardingStateMachine.currentState] ?? ""
+        if appModel.captureMode == .rotation {
+            if let rotationTitle = rotationStateToTitleMap[onboardingStateMachine.currentState] {
+                return rotationTitle
+            }
+        }
+        return onboardingStateToTitleMap[onboardingStateMachine.currentState] ?? ""
     }
+    
+    private let rotationStateToTitleMap: [ OnboardingState: String ] = [
+        .tooFewImages: LocalizedString.rotationTooFewImagesTitle,
+        .firstSegmentNeedsWork: LocalizedString.rotationFirstSegmentNeedsWorkTitle,
+        .firstSegmentComplete: LocalizedString.rotationFirstSegmentCompleteTitle,
+        .secondSegmentNeedsWork: LocalizedString.rotationSecondSegmentNeedsWorkTitle,
+        .secondSegmentComplete: LocalizedString.rotationSecondSegmentCompleteTitle,
+        .thirdSegmentNeedsWork: LocalizedString.rotationThirdSegmentNeedsWorkTitle,
+        .thirdSegmentComplete: LocalizedString.rotationThirdSegmentCompleteTitle
+    ]
 
     private let onboardingStateToDetailTextMap: [ OnboardingState: String ] = [
         .tooFewImages: String(format: LocalizedString.tooFewImagesDetailText, AppDataModel.minNumImages),
@@ -199,6 +214,21 @@ struct OnboardingTutorialView: View {
     ]
 
     private var detailText: String {
-        onboardingStateToDetailTextMap[onboardingStateMachine.currentState] ?? ""
+        if appModel.captureMode == .rotation {
+            if let rotationDetail = rotationStateToDetailTextMap[onboardingStateMachine.currentState] {
+                return rotationDetail
+            }
+        }
+        return onboardingStateToDetailTextMap[onboardingStateMachine.currentState] ?? ""
     }
+    
+    private let rotationStateToDetailTextMap: [ OnboardingState: String ] = [
+        .tooFewImages: String(format: LocalizedString.rotationTooFewImagesDetailText, AppDataModel.minNumImages),
+        .firstSegmentNeedsWork: LocalizedString.rotationFirstSegmentNeedsWorkDetailText,
+        .firstSegmentComplete: LocalizedString.rotationFirstSegmentCompleteDetailText,
+        .secondSegmentNeedsWork: LocalizedString.rotationSecondSegmentNeedsWorkDetailText,
+        .secondSegmentComplete: LocalizedString.rotationSecondSegmentCompleteDetailText,
+        .thirdSegmentNeedsWork: LocalizedString.rotationThirdSegmentNeedsWorkDetailText,
+        .thirdSegmentComplete: LocalizedString.rotationThirdSegmentCompleteDetailText
+    ]
 }

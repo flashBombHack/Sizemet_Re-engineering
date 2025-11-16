@@ -228,5 +228,103 @@ extension OnboardingTutorialView {
             value: "%d of %d images will be processed on iPhone. Transfer images to Mac to create the full model. ",
             comment: "Guidance to transfer the images to Mac."
         )
+
+        static let rotationTooFewImagesTitle = NSLocalizedString(
+            "Keep rotating your object. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Keep rotating your object.",
+            comment: "Feedback title for when user has less than the minimum images required in rotation mode."
+        )
+
+        static let rotationTooFewImagesDetailText = NSLocalizedString(
+            "You need at least <min num of images> images of your object to create a model. Rotate slowly and steadily. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "You need at least %d images of your object to create a model. Rotate slowly and steadily.",
+            comment: "Feedback for when user has less than the minimum images required in rotation mode."
+        )
+
+        static let rotationFirstSegmentNeedsWorkTitle = NSLocalizedString(
+            "Keep rotating to complete the first segment. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Keep rotating to complete the first segment.",
+            comment: "Feedback title for when user still has work to do to complete the first segment in rotation mode."
+        )
+
+        static let rotationFirstSegmentNeedsWorkDetailText = NSLocalizedString(
+            "For best quality, three segments are recommended. Keep your device stationary and rotate the object slowly. (Review, Rotation Capture, 1st Segment)",
+            bundle: Bundle.main,
+            value: "For best quality, three segments are recommended. Keep your device stationary and rotate the object slowly.",
+            comment: "Feedback for when user still has work to do to complete the first segment in rotation mode."
+        )
+
+        static let rotationFirstSegmentCompleteTitle = NSLocalizedString(
+            "First segment complete. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "First segment complete.",
+            comment: "Feedback title for when user has finished capturing first segment in rotation mode."
+        )
+
+        static let rotationFirstSegmentCompleteDetailText = NSLocalizedString(
+            "For best quality, three segments are recommended. Continue rotating for additional segments. (Review, Rotation Capture, 1st Segment)",
+            bundle: Bundle.main,
+            value: "For best quality, three segments are recommended. Continue rotating for additional segments.",
+            comment: "Feedback for when user has finished capturing first segment in rotation mode."
+        )
+
+        static let rotationSecondSegmentNeedsWorkTitle = NSLocalizedString(
+            "Keep rotating to complete the second segment. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Keep rotating to complete the second segment.",
+            comment: "Feedback for when the person hasn't finished capturing the second segment in rotation mode."
+        )
+
+        static let rotationSecondSegmentNeedsWorkDetailText = NSLocalizedString(
+            "For best quality, three segments are recommended. Rotate the object slowly and keep device stationary. (Review, Rotation Capture, 2nd Segment)",
+            bundle: Bundle.main,
+            value: "For best quality, three segments are recommended. Rotate the object slowly and keep device stationary.",
+            comment: "Feedback for when the person hasn't finished capturing the second segment in rotation mode."
+        )
+
+        static let rotationSecondSegmentCompleteTitle = NSLocalizedString(
+            "Second segment complete. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Second segment complete.",
+            comment: "Feedback for when the person has finished capturing the second segment in rotation mode."
+        )
+
+        static let rotationSecondSegmentCompleteDetailText = NSLocalizedString(
+            "For best quality, three segments are recommended. Continue rotating for the final segment. (Review, Rotation Capture, 2nd segment)",
+            bundle: Bundle.main,
+            value: "For best quality, three segments are recommended. Continue rotating for the final segment.",
+            comment: "Feedback for when the person has finished capturing the second segment in rotation mode."
+        )
+
+        static let rotationThirdSegmentNeedsWorkTitle = NSLocalizedString(
+            "Keep rotating to complete the final segment. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Keep rotating to complete the final segment.",
+            comment: "Feedback for when the person needs to complete the final segment in rotation mode."
+        )
+
+        static let rotationThirdSegmentNeedsWorkDetailText = NSLocalizedString(
+            "For best quality, three segments are recommended. If you're done, tap Finish to complete your object. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "For best quality, three segments are recommended. If you're done, tap Finish to complete your object.",
+            comment: "Feedback for when user still has work to do to complete the final segment in rotation mode."
+        )
+
+        static let rotationThirdSegmentCompleteTitle = NSLocalizedString(
+            "All segments complete. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "All segments complete.",
+            comment: "Feedback for when the person has captured the final segment in rotation mode."
+        )
+
+        static let rotationThirdSegmentCompleteDetailText = NSLocalizedString(
+            "Tap Finish to process your object. (Review, Rotation Capture)",
+            bundle: Bundle.main,
+            value: "Tap Finish to process your object.",
+            comment: "Feedback for when the person has captured the final segment and can process the object model in rotation mode."
+        )
     }
 }
